@@ -1,0 +1,42 @@
+/*
+Autor: Roberto Jaime Rico SAndoval.
+Fille: Pràctica 6 
+Date: 05/ 07/ 2022
+*/
+
+CREATE DATABASE produccion;
+USE produccion;
+
+CREATE TABLE Productos (
+	codigo INT (10),
+    nombre VARCHAR (100),
+    precio DOUBLE,
+    codigo_fabricante INT (10),
+    
+    PRIMARY KEY (codigo_fabricante)
+);
+
+CREATE TABLE Fabricante (
+	codigo INT (10),
+    nombre VARCHAR (100),
+    
+    FOREIGN KEY (codigo) REFERENCES Productos (codigo_fabricante)
+);
+
+INSERT INTO Productos VALUES 
+(135, "Consola de videojuegos", 4500.0, 458),
+(856, "Figura de acciòn", 356.0, 896),
+(1589, "Playera estampada", 255.0, 8082),
+(7563, "Juego de vìdeo fìsico", 320.0, 7913),
+(9346, "Juego de vìdeo virtual", 210.0, 46203);
+
+INSERT INTO Fabricante VALUES 
+(458, "Xbotz"),
+(896, "Nientiendo"),
+(8082, "Shula"),
+(7913, "Sonyzzzz"),
+(46203, "Garena");
+
+SELECT * FROM Productos;
+SELECT * FROM Fabricante;
+

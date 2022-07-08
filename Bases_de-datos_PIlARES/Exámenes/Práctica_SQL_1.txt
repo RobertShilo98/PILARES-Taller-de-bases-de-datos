@@ -1,0 +1,94 @@
+CREATE DATABASE Empresas;   -- Creación de la base de datos.	
+
+-- Autor: Roberto Jaime Rico Sandoval.
+-- Fille: Código para ejercicio.
+-- Date: 30/ 06/ 2022
+
+
+-- Creación de tablas.
+CREATE TABLE Cliente (
+    id_cliente  int NOT NULL    AUTO_INCREMENT,
+    nombre_cliente  VARCHAR(50),
+    id_sucursal int,
+    
+    PRIMARY KEY (id_cliente),
+    FOREIGN KEY (id_sucursal) REFERENCES Sucursal(id_sucursal)
+);
+
+CREATE TABLE Sucursal (
+    id_sucursal  int NOT NULL    AUTO_INCREMENT,
+    nombre_sucursal  VARCHAR(50),
+    
+    PRIMARY KEY (id_sucursal)
+);
+
+CREATE TABLE Producto (
+    id_producto int NOT NULL AUTO_INCREMENT,
+    nombre_producto VARCHAR(50),
+    precio float,
+    
+    PRIMARY KEY (id_producto)
+);
+
+CREATE TABLE Ventas (
+    num_ventas int NOT NULL AUTO_INCREMENT,
+    cliente int,
+    producto int,
+    
+    PRIMARY KEY (num_ventas),
+    FOREIGN KEY (cliente) REFERENCES Cliente(id_cliente),
+    FOREIGN KEY (producto) REFERENCES Producto (id_producto)
+    
+);
+
+-- Insertar valores a las columnas de la tabla.
+INSERT INTO Cliente (nombre_cliente, id_sucursal) VALUES
+    ('Raul',1),
+    ('Karla',3),
+    ('Monica',2),
+    ('Gabriel',3),
+    ('Jose',1)
+;
+    
+INSERT INTO Sucursal (nombre_sucursal) VALUES
+    ('Norte'),
+    ('Centro'),
+    ('Sur')
+;
+
+INSERT INTO Ventas (cliente, producto) VALUES
+    (3,1),
+    (3,3),
+    (4,3),
+    (3,2)
+;
+
+INSERT INTO Producto (nombre_producto, precio) VALUES
+    ("Cartera", 150),
+    ("Reloj", 300),
+    ("Cinturon", 80)
+;
+
+-- Mostrar el contenido de las tablas.
+SELECT * FROM Producto;
+SELECT * FROM Ventas;
+SELECT * FROM Sucursal;
+
+-- Eliminar un registro de la tabla.
+DELETE FROM Cliente WHERE nombre_cliente = "Monica";
+
+-- Eliminar toda una tabla.
+-- DELETE FROM Cliente;
+-- SELECT * FROM Cliente;
+
+-- Añadir columnas en la tabla.
+ALTER TABLE Sucursal ADD Localizacion VARCHAR(50);
+SELECT * FROM Sucursal;
+
+-- Actualizar el tipo de dato de una columna.
+ALTER TABLE Sucursal MODIFY COLUMN Localizacion int;
+SELECT * FROM Sucursal;
+
+-- Eliminar una columna de la tabla.
+ALTER TABLE Sucursal DROP COLUMN Localizacion;
+SELECT * FROM Sucursal;

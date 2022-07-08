@@ -1,0 +1,131 @@
+/*
+Autor: Roberto Jaime Rico SAndoval.
+Fille: Pràctica 6 
+Date: 05/ 07/ 2022
+*/
+
+CREATE DATABASE produccion2;
+USE produccion2;
+
+CREATE TABLE Productos (
+    codigo INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR (100),
+    precio DOUBLE,
+    codigo_fabricante INT
+);
+
+	
+CREATE TABLE Fabricante (
+	codigo INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR (100)
+);
+
+/*
+INSERT INTO Productos VALUES 
+(NULL,'Disco duro SATA3 1TB', 86.99, 5),
+(NULL,"Figura de acciòn", 356.0,856),
+(NULL,"Playera estampada", 255.0,1589),
+(NULL,"Juego de vìdeo fìsico", 320.0,7563),
+(NULL,"Juego de vìdeo virtual", 210.0,9346);
+
+INSERT INTO Fabricante VALUES 
+(NULL,"Xbotz"),
+(NULL,"Nientiendo"),
+(NULL,"Shula"),
+(NULL,"Sonyzzzz"),
+(NULL,"Garena");
+
+SELECT * FROM Productos;
+SELECT * FROM Fabricante;
+*/
+
+-- ¿Cuántos productos hay en la tabla?
+SELECT nombre FROM Productos;
+SELECT COUNT(nombre) FROM Productos; 
+
+-- Productos por empresas.
+SELECT COUNT(codigo) FROM Fabricante
+WHERE nombre = "Xbotz";
+SELECT COUNT(codigo) FROM Fabricante
+WHERE nombre = "Nientiendo";
+SELECT COUNT(codigo) FROM Fabricante
+WHERE nombre = "Shula";
+SELECT COUNT(codigo) FROM Fabricante
+WHERE nombre = "Sonyzzzz";
+SELECT COUNT(codigo) FROM Fabricante
+WHERE nombre = "Garena";
+
+-- Orden descendente de precios (No lo consulte en la orden de empresas, porque, no había muchos números a ordenar, je je).
+SELECT precio FROM Productos
+ORDER BY (precio);
+
+-- Precio máximo.
+SELECT MAX(precio) FROM Productos;
+
+-- Precio minímo.
+SELECT MIN(precio) FROM Productos;
+
+-- Media del precio.
+SELECT AVG(precio) FROM Productos;
+
+
+-- Inserción de datos.
+INSERT INTO Fabricante VALUES(NULL, 'Asus');
+INSERT INTO fabricante VALUES(NULL, 'Lenovo');
+INSERT INTO fabricante VALUES(NULL, 'Hewlett-Packard');
+INSERT INTO fabricante VALUES(NULL, 'Samsung');
+INSERT INTO fabricante VALUES(NULL, 'Seagate');
+INSERT INTO fabricante VALUES(NULL, 'Crucial');
+INSERT INTO fabricante VALUES(NULL, 'Gigabyte');
+INSERT INTO fabricante VALUES(NULL, 'Huawei');
+INSERT INTO fabricante VALUES(NULL, 'Xiaomi');
+
+INSERT INTO productos VALUES(NULL, 'Disco duro SATA3 1TB', 86.99, 5);
+INSERT INTO productos VALUES(NULL, 'Memoria RAM DDR4 8GB', 120, 6);
+INSERT INTO productos VALUES(NULL, 'Disco SSD 1 TB', 150.99, 4);
+INSERT INTO productos VALUES(NULL, 'GeForce GTX 1050Ti', 185, 7);
+INSERT INTO productos VALUES(NULL, 'GeForce GTX 1080 Xtreme', 755, 6);
+INSERT INTO productos VALUES(NULL, 'Monitor 24 LED Full HD', 202, 1);
+INSERT INTO productos VALUES(NULL, 'Monitor 27 LED Full HD', 245.99, 1);
+INSERT INTO productos VALUES(NULL, 'Portátil Yoga 520', 559, 2);
+INSERT INTO productos VALUES(NULL, 'Portátil Ideapd 320', 444, 2);
+INSERT INTO productos VALUES(NULL, 'Impresora HP Deskjet 3720', 59.99, 3);
+INSERT INTO productos VALUES(NULL, 'Impresora HP Laserjet Pro M26nw', 180, 3);
+INSERT INTO productos VALUES(NULL, 'Celular p512', 2500, 9, "Huawei");
+INSERT INTO productos VALUES(NULL, 'Celular BlackDragonS', 3500, 9, "Huawei");
+INSERT INTO productos VALUES(NULL, 'X - 154', 2200, 8, "Xiaomi");
+INSERT INTO productos VALUES(NULL, 'Xiamo plus', 1800, 8, "Xiaomi");
+
+
+
+SELECT * FROM productos;
+SELECT * FROM fabricante;
+
+-- Listado de nombres.
+SELECT nombre FROM productos
+ORDER BY (nombre);
+
+-- Listar nombre por precio y precio por nombre.
+SELECT nombre, precio FROM productos
+ORDER BY (nombre);
+
+SELECT nombre, precio FROM productos
+ORDER BY (Precio);
+
+-- Listado de todos los elemntos de prodcto.
+SELECT * FROM productos;
+
+-- Devuelve una lista con el nombre del producto, precio y nombre de fabricante de todos los productos de la base de datos.
+SELECT * FROM productos
+INNER JOIN fabricante
+ON productos.codigo = fabricante.codigo;
+
+SELECT nombre, precio, fabricante FROM productos;
+
+-- Devuelve todos los productos del fabricante Lenovo.
+SELECT fabricante, nombre, precio FROM productos
+WHERE fabricante = "LENOVO";
+
+-- Lista el nombre del producto más caro del fabricante Lenovo.
+SELECT fabricante, nombre, MAX(precio) FROM productos
+WHERE fabricante = "LENOVO";
